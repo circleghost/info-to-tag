@@ -26,8 +26,10 @@ def convert_to_json(input, tag):
 st.title('產品資訊轉換器')
 
 # 輸入框
-input = st.text_area('請輸入產品資訊')
-tag_input = st.text_area('請輸入你要的json格式，每行一個不用逗點')
+input = st.text_area('請輸入產品資訊', height = 200)
+tag_input = st.text_area('請輸入你要的json格式，每行一個不用逗點', 
+                         height = 200,
+                         help = '每行輸入一個標籤名稱，例如 good、feature、color 等等。')
 
 # 將不同行的內容轉換成逗點分隔
 tag = ', '.join(tag_input.split('\n'))
