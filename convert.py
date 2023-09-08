@@ -23,13 +23,13 @@ def convert_to_json(input, tag):
     # 直接返回回應的內容
     return converted_content
 
-if 'output1' not in st.session_state:
-    st.session_state['output1'] = ''
-
 # Streamlit界面
 st.title('產品資訊轉換器')
 
 # 輸入框
+if 'input' not in st.session_state:
+    st.session_state['input'] = ''
+
 st.session_state['input'] = st.text_area('## 請輸入產品資訊', height = 200, key='input')
 tag_input = st.text_area('## 請輸入你要的json格式，每行一個不用逗點', height = 200, help = '每行輸入一個標籤名稱，例如 good、feature、color 等等。')
 
@@ -61,9 +61,9 @@ if st.button('送出'):
         # 更新進度條
         progress_bar.progress((i + 1) / 3)
     # 儲存第一次的結果
-    if 'input' not in st.session_state:
-        st.session_state['input'] = ''
-    
+    if 'output1' not in st.session_state:
+        st.session_state['output1'] = ''
+
     st.session_state['output1'] = result
 
     # 第一次的結果出現後，顯示第二個按鈕
