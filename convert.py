@@ -53,9 +53,8 @@ if st.button('送出'):
             st.write(result)
         # 更新進度條
         progress_bar.progress((i + 1) / 3)
-
-# 儲存第一次的結果
-output1 = result
+    # 儲存第一次的結果
+    output1 = result
 
 # 新增一個按鈕
 if st.button('進行二次檢查！'):
