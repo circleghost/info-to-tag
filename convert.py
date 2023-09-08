@@ -78,10 +78,12 @@ if st.button('送出'):
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
-                {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{output1_str}```  \n 請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
+                {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{st.session_state['output1_str']}```  \n 請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
             ],
             temperature=0  # 創意程度
         )
+        # 打印 response 的內容
+        st.write(response)
 
         # 從API回應中獲取轉換後的內容
         converted_content = response.choices[0].message['content'].strip()
