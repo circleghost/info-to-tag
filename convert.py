@@ -29,8 +29,8 @@ st.title('產品資訊轉換器')
 # 輸入框
 if 'input' not in st.session_state:
     st.session_state['input'] = ''
-st.session_state['input'] = st.text_area('請輸入產品資訊', value=st.session_state['input'], height = 200)
-tag_input = st.text_area('請輸入你要的json格式，每行一個不用逗點', 
+st.session_state['input'] = st.text_area('## 請輸入產品資訊', value=st.session_state['input'], height = 200)
+tag_input = st.text_area('## 請輸入你要的json格式，每行一個不用逗點', 
                          height = 200,
                          help = '每行輸入一個標籤名稱，例如 good、feature、color 等等。')
 
@@ -88,7 +88,11 @@ if button2.button('進行二次檢查！'):
         # 將結果轉換成字串並在前後加入```
         converted_content = f"```\n{converted_content}\n```"
         # 顯示結果
+        st.markdown("### 最佳 json 是這個", unsafe_allow_html=True)
         st.markdown(converted_content, unsafe_allow_html=True)
+        st.markdown("### 3種測試結果如下", unsafe_allow_html=True)
+        for output in st.session_state['output1']:
+            st.markdown(output, unsafe_allow_html=True)
     else:
         # 如果結果不是json格式，則直接輸出原始結果
         st.write(converted_content)
