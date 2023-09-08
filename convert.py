@@ -14,7 +14,7 @@ def convert_to_json(input, tag):
         {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
         {"role": "user", "content": f"每個分類可以有多個標籤，我會告知你需求的欄位。請將每個指定欄位進行詳細分類，並僅以json格式返回，請最大化 prompt 效果。以下是範例：```{example}```, 請分類以下內容：```{input}```。  \n Provide them in JSON format with the following keys:{tag}"}
     ],
-    temperature=0.2  # 創意程度
+    temperature=0.7  # 創意程度
 )
     
     # 從API回應中獲取轉換後的內容
