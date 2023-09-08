@@ -23,14 +23,19 @@ def convert_to_json(input, tag):
     # 直接返回回應的內容
     return converted_content
 
+# 使用 st.session_state['input'] 和 st.session_state['output1'] 替換原本的 input 和 output1 變數
+if 'input' not in st.session_state:
+    st.session_state['input'] = ''
+
+if 'output1' not in st.session_state:
+    st.session_state['output1'] = ''
+
 # Streamlit界面
 st.title('產品資訊轉換器')
 
 # 輸入框
-input = st.text_area('請輸入產品資訊', height = 200)
-tag_input = st.text_area('請輸入你要的json格式，每行一個不用逗點', 
-                         height = 200,
-                         help = '每行輸入一個標籤名稱，例如 good、feature、color 等等。')
+st.session_state['input'] = st.text_area('## 請輸入產品資訊', height = 200, key='input')
+tag_input = st.text_area('## 請輸入你要的json格式，每行一個不用逗點', height = 200, help = '每行輸入一個標籤名稱，例如 good、feature、color 等等。')
 
 # 將不同行的內容轉換成逗點分隔
 tag = ', '.join(tag_input.split('\n'))
@@ -47,7 +52,7 @@ if st.button('送出'):
     progress_bar = st.progress(0)
     for i in range(3):
         # 執行轉換，每次傳入不同的參數
-        result = convert_to_json(input + " ", tag)
+        result = convert_to_json(st.session_state['input'] + " ", tag)
         # 檢查結果是否為json格式
         if result.startswith('{') and result.endswith('}'):
             # 將結果轉換成字串並在前後加入```
@@ -60,7 +65,7 @@ if st.button('送出'):
         # 更新進度條
         progress_bar.progress((i + 1) / 3)
     # 儲存第一次的結果
-    output1 = result
+    st.session_state['output1'] = result
 
     # 第一次的結果出現後，顯示第二個按鈕
 if button2.button('進行二次檢查！'):
@@ -69,7 +74,7 @@ if button2.button('進行二次檢查！'):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
-            {"role": "user", "content": f"產品資訊：```{input}```  \n 產品資訊對應的3個分類json：```{output1}```  \n 請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
+            {"role": "user", "content": f"產品資訊：{st.session_state['input']} \n 產品資訊對應的3個分類json：{st.session_state['output1']} \n 請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
         ],
         temperature=0  # 創意程度
     )
