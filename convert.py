@@ -44,8 +44,8 @@ button2 = st.empty()
 
 # 送出按鈕
 if st.button('送出'):
-    # 初始化 output1
-    output1 = ''
+    # 初始化 output1 為一個空列表
+    output1 = []
     # 創建進度條
     progress_bar = st.progress(0)
     for i in range(3):
@@ -62,13 +62,13 @@ if st.button('送出'):
             st.write(result)
         # 更新進度條
         progress_bar.progress((i + 1) / 3)
-    # 儲存第一次的結果
-    st.session_state['output1'] = result
+        # 將結果添加到 output1 列表中
+        output1.append(result)
+    # 儲存所有的結果
+    st.session_state['output1'] = output1
 
     # 第一次的結果出現後，顯示第二個按鈕
     if button2.button('進行二次檢查！'):
-        st.write(f"input: {st.session_state['input']}")
-        st.write(f"output1: {st.session_state['output1']}")
         # 執行第二次的轉換
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
