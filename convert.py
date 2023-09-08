@@ -78,7 +78,7 @@ if button2.button('進行二次檢查！'):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
-            {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{st.session_state['output1_str']}```  \n 空值、「無」跟null是等同的，我要的json key內只有「{tag}」這幾個，有其他的key的就是劣質的json請務必排除。請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
+            {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{st.session_state['output1_str']}```  \n 空值、「無」跟null是等同的，請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。Provide them in JSON format with the following keys:{tag}"}
         ],
         temperature=0  # 創意程度
     )
