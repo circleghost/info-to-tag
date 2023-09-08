@@ -37,14 +37,15 @@ tag_input = st.text_area('請輸入你要的json格式，每行一個不用逗�
 # 將不同行的內容轉換成逗點分隔
 tag = ', '.join(tag_input.split('\n'))
 
-# 初始化 output1
-output1 = ''
+
 
 # 創建一個空的按鈕區塊
 button2 = st.empty()
 
 # 送出按鈕
 if st.button('送出'):
+    # 初始化 output1
+    output1 = ''
     # 創建進度條
     progress_bar = st.progress(0)
     for i in range(3):
@@ -66,9 +67,6 @@ if st.button('送出'):
 
     # 第一次的結果出現後，顯示第二個按鈕
     if button2.button('進行二次檢查！'):
-        st.write(f"input: {st.session_state['input']}")
-        st.write(f"output1: {st.session_state['output1']}")
-        
         # 執行第二次的轉換
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
