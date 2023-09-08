@@ -69,12 +69,16 @@ if st.button('送出'):
 
     # 第一次的結果出現後，顯示第二個按鈕
     if button2.button('進行二次檢查！'):
+        # 將 output1 的內容轉換成一個字串
+        output1_str = '\n'.join(st.session_state['output1'])
+        st.write(f"input: {st.session_state['input']}")
+        st.write(f"output1: {st.session_state['output1']}")
         # 執行第二次的轉換
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
-                {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{st.session_state['output1']}```  \n 請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
+                {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{output1_str}```  \n 請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。"}
             ],
             temperature=0  # 創意程度
         )
