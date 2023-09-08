@@ -70,6 +70,7 @@ if st.button('送出'):
     # 第一次的結果出現後，顯示第二個按鈕
     if button2.button('進行二次檢查！'):
         # 將 output1 的內容轉換成一個字串
+        print('rsssesponse')
         st.session_state['output1_str'] = '\n'.join(st.session_state['output1'])
         st.write(f"['input']")
         st.write(f"output1: {st.session_state['output1_str']}")
@@ -82,7 +83,7 @@ if st.button('送出'):
             ],
             temperature=0  # 創意程度
         )
-
+        print(response)
         # 儲存 response 的內容
         st.session_state['response'] = response
 
