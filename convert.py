@@ -29,8 +29,10 @@ st.title('產品資訊轉換器')
 # 輸入框
 if 'input' not in st.session_state:
     st.session_state['input'] = ''
-st.session_state['input'] = st.text_area('## 請輸入產品資訊', value=st.session_state['input'], height = 200)
-tag_input = st.text_area('## 請輸入你要的json格式，每行一個不用逗點', 
+st.markdown('## 請輸入產品資訊')
+st.session_state['input'] = st.text_area('', value=st.session_state['input'], height = 200)
+st.markdown('## 請輸入你要的json格式，每行一個不用逗點')
+tag_input = st.text_area('', 
                          height = 200,
                          help = '每行輸入一個標籤名稱，例如 good、feature、color 等等。')
 
