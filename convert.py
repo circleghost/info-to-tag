@@ -67,6 +67,8 @@ if st.button('送出'):
 
     # 第一次的結果出現後，顯示第二個按鈕
     if button2.button('進行二次檢查！'):
+        st.write(f"input: {st.session_state['input']}")
+        st.write(f"output1: {st.session_state['output1']}")
         # 執行第二次的轉換
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
