@@ -14,7 +14,7 @@ def convert_to_json(input, tag):
         {"role": "system", "content": f"請你作為一名專業產品標籤分類人員，根據給定的產品資訊，以及不同標籤進行分類，並且只根據給定標籤進行分類。"},
         {"role": "user", "content": f"每個分類可以有多個標籤，請將每個指定欄位進行詳細分類，並僅以json格式返回，請最大化 prompt 效果。以下是範例：```{example}```  \n 請分類以下內容：```{input}```。  \n 標籤不要出現複雜或過長的詞彙，JOSN不要出現給定格式外的內容。  \n Provide them in JSON format with the following keys:{tag_input}"}
     ],
-    temperature = 0.3  # 創意程度
+    temperature=0.3  # 創意程度
 )
     
     # 從API回應中獲取轉換後的內容
@@ -52,7 +52,7 @@ if st.button('送出'):
     progress_bar = st.progress(0)
     for i in range(3):
         # 執行轉換，每次傳入不同的參數
-        result = convert_to_json(st.session_state['input'] + "" , tag)
+        result = convert_to_json(st.session_state['input'] + " ", tag)
         # 檢查結果是否為json格式
         if result.startswith('{') and result.endswith('}'):
             # 將結果轉換成字串並在前後加入```
