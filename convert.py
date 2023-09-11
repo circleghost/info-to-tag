@@ -52,7 +52,7 @@ if st.button('送出'):
     progress_bar = st.progress(0)
     for i in range(3):
         # 執行轉換，每次傳入不同的參數
-        result = convert_to_json(st.session_state['input'] + "" , tag, temperature=0.1*(i+1))
+        result = convert_to_json(st.session_state['input'] + "" , tag)
         # 檢查結果是否為json格式
         if result.startswith('{') and result.endswith('}'):
             # 將結果轉換成字串並在前後加入```
