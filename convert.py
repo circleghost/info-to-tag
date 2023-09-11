@@ -80,9 +80,9 @@ if button2.button('進行二次檢查！'):
             {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
             {"role": "user", "content": f"產品資訊：```{st.session_state['input']}```  \n 產品資訊對應的3個分類json：```{st.session_state['output1_str']}```  \n 空值、「無」跟null是等同的，請問哪個json是分類最準確、沒有錯誤資訊的？僅給我json即可。不要有任何一個文字說明，一個都不要。The JSON will then only retain the following keys: {tag}."}
         ],
-        temperature=0  # 創意程度
+        temperature=0.5  # 創意程度
     )
-    st.write(response)
+
     # 從API回應中獲取轉換後的內容
     converted_content = response.choices[0].message['content'].strip()
 
