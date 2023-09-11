@@ -82,7 +82,7 @@ if button2.button('進行二次檢查！'):
         ],
         temperature=0  # 創意程度
     )
-    st.write(tag)
+    st.write(response)
     # 從API回應中獲取轉換後的內容
     converted_content = response.choices[0].message['content'].strip()
 
