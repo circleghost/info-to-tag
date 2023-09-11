@@ -74,7 +74,7 @@ if button2.button('進行二次檢查！'):
     # 將 output1 的內容轉換成一個字串
     st.session_state['output1_str'] = '\n'.join(st.session_state['output1'])
     # 執行第二次的轉換
-    print(key)
+    print(tag)
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
