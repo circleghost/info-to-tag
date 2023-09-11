@@ -11,7 +11,7 @@ def convert_to_json(input, tag):
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": "請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類。"},
+        {"role": "system", "content": f"請你作為一名專業分類人員，根據給定的產品資訊，以及不同標籤進行分類，標籤中只保留‵‵‵{key}‵‵‵鍵值。"},
         {"role": "user", "content": f"每個分類可以有多個標籤，我會告知你需求的欄位。請將每個指定欄位進行詳細分類，並僅以json格式返回，請最大化 prompt 效果。以下是範例：```{example}```, 請分類以下內容：```{input}```。  \n 不要出現複雜或過長的詞彙。  \n Provide them in JSON format with the following keys:{tag}"}
     ],
     temperature=0.3  # 創意程度
