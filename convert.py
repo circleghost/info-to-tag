@@ -9,7 +9,7 @@ example = '''{'Title : 短袖上衣, Category : ADSAA01、ADSAB02、ADSAC02、AD
 def convert_to_json(input, tag, temperature=0.1):
     # 調用GPT API
     response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo-instruct",
+    model="gpt-3.5-turbo",
     messages=[
         {"role": "system", "content": f"請你作為一名專業產品標籤分類人員，根據給定的產品資訊，以及不同標籤進行分類，並且只根據給定標籤進行分類。"},
         {"role": "user", "content": f"每個分類可以有多個標籤，請將每個指定欄位進行詳細分類，並僅以json格式返回，請最大化 prompt 效果。以下是範例：```{example}```  \n 請分類以下內容：```{input}```。  \n 標籤不要出現複雜或過長的詞彙，JOSN不要出現給定格式外的內容。  \n Provide them in JSON format with the following keys:  \n ```{tag_input}```"}
